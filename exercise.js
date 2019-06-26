@@ -22,32 +22,53 @@ NewGame.score = [
   [10, 0],
   [10, 0],
   [10, 0],
-  [7, 2],
-  [3, 3, 0]
+  [10, 0],
+  [10, 10, 10]
 ];
 
 // function
 const basicBowlingCalculation = () => {
   for (let i = 0; i < NewGame.score.length && NewGame.frames < 10; i++) {
-    // if its a strike with the next score not a strike
-    if (NewGame.score[i][0] == 10 && NewGame.score[i + 1][0] !== 10) {
+    // if its the the 9th frame with a strike
+    if (NewGame.score[i][0] == 10 && NewGame.frames == 8) {
       NewGame.result +=
         NewGame.score[i][0] + NewGame.score[i + 1][0] + NewGame.score[i + 1][1];
       NewGame.frames++;
+    }
+    // if its a strike and the next frame is the 10th
+    else if (NewGame.score[i][0] == 10 && NewGame.frames == 9) {
+      NewGame.frames++;
+      NewGame.result +=
+        NewGame.score[i][0] + NewGame.score[i][1] + NewGame.score[i][2];
+    }
+    // if its a strike with the next score not a strike
+    else if (
+      NewGame.score[i][0] == 10 &&
+      NewGame.score[i + 1][0] !== 10 &&
+      NewGame.frames < 8
+    ) {
+      NewGame.frames++;
+      NewGame.result +=
+        NewGame.score[i][0] + NewGame.score[i + 1][0] + NewGame.score[i + 1][1];
       // if its a strike and the next score is also a strike
-    } else if (NewGame.score[i][0] == 10 && NewGame.score[i + 1][0] == 10) {
+    } else if (
+      NewGame.score[i][0] == 10 &&
+      NewGame.score[i + 1][0] == 10 &&
+      NewGame.frames < 8
+    ) {
+      NewGame.frames++;
       NewGame.result +=
         NewGame.score[i][0] + NewGame.score[i + 1][0] + NewGame.score[i + 2][0];
+    }
+    // if its a spare
+    else if (NewGame.score[i][0] + NewGame.score[i][1] === 10) {
       NewGame.frames++;
-      // if its a spare
-    } else if (NewGame.score[i][0] + NewGame.score[i][1] === 10) {
       NewGame.result +=
         NewGame.score[i][0] + NewGame.score[i][1] + NewGame.score[i + 1][0];
-      NewGame.frames++;
     } else if (NewGame.score[i][0] + NewGame.score[i][1] !== 10) {
       // adds up the other scores
-      NewGame.result += NewGame.score[i][0] + NewGame.score[i][1];
       NewGame.frames++;
+      NewGame.result += NewGame.score[i][0] + NewGame.score[i][1];
     }
 
     console.log(NewGame.result);
