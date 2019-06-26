@@ -9,7 +9,7 @@ To try your own results adjust the array found at index.js - ('node index.js' wi
 The tests I have created are with MochaJS. ( 'mocha test' in the console will run it) 
 
 **
-As you'll see I tried to introduce an element of OOP programming to the task.
+As you'll see I tried to introduce an element of OOP to the task.
 Words like Nil and X for strike I did originally allow to run as you can see in the commits,
 but as I broke the file up for testing purposes I needed to change the values to bowling.x for example.
 
